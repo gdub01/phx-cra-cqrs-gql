@@ -7,9 +7,24 @@ defmodule BonstackWeb.Endpoint do
   #
   # You should set gzip to true if you are running phoenix.digest
   # when deploying your static files in production.
+
+  plug Plug.Static.IndexHtml,
+    at: "/"
+
   plug Plug.Static,
-    at: "/", from: :bonstack, gzip: false,
-    only: ~w(css fonts images js favicon.ico robots.txt)
+    at: "/", from: {:bonstack, "priv/build"}, gzip: false,
+    only: ~w(favicon.ico robots.txt manifest.json index.html)
+
+  plug Plug.Static,
+    at: "/static/js", from: {:bonstack, "priv/build/static/js"}, gzip: true
+
+  plug Plug.Static,
+    at: "/static/css", from: {:bonstack, "priv/build/static/css"}, gzip: true
+
+  plug Plug.Static,
+    at: "/static/media", from: {:bonstack, "priv/build/static/media"}, gzip: false
+
+
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
