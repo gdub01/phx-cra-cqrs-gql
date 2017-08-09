@@ -1,0 +1,40 @@
+# Server
+
+# App artifacts
+/server/_build
+/server/db
+/server/deps
+/server/*.ez
+
+# Generated on crash by the VM
+/servererl_crash.dump
+
+# Files matching config/*.secret.exs pattern contain sensitive
+# data and you should not commit them into version control.
+#
+# Alternatively, you may comment the line below and commit the
+# secrets files as long as you replace their contents by environment
+# variables.
+/server/config/*.secret.exs
+
+# Web
+
+# dependencies
+/web/node_modules
+
+# testing
+/web/coverage
+
+# production
+/web/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
