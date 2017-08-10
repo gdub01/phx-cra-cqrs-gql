@@ -1,10 +1,10 @@
 # Create React App and Phoenix
 
-## Highlights
+## Why choose CRA for the phoenix frontend
 
-1. You don't need to eject create-react-app (CRA).. so you can keep up to date.
-2. You get a lot of stuff for free with CRA like code splitting, testing, etc.
-3. You get access to all the components in the react world that make front end work faster.
+1. You don't need to eject create-react-app (CRA).. so you can keep up to date with latest JS/webpack setups.
+2. You get access to all the components in the react world that make front end work faster.
+3. You get a PWA / service worker for possibly caching user data / offline support. 
 
 ## ...but no SSR. 4 frontend practices make SSR with CRA difficult...
 
@@ -17,12 +17,14 @@ So just getting SSR to work at all with CRA seems impossible unless you create a
 
 #### Code splitting
 
-With CRA can/should? do code splitting to decrease your bundle size.
+CRA can do code splitting to decrease your bundle size / initial load times.
 Getting SSR to work with code splitting seems to make importing harder.
 
 #### Prefetching data
 
-If you want to prefetch data to hydrate state when you respond via SSR, you need to recreate each route on the server side so you can specify the route's data dependencies... increasing dev time for creating and maintaining features.
+If you want to prefetch data to hydrate state when you respond via SSR, you may need to recreate each route on the server side so you can specify the route's data dependencies... increasing dev time for creating and maintaining features.
+
+* Using a tool like Apollo (graphql) SSR to get data dependencies dynamically may make it so the above isn't required. So it may be worth looking at eventually.
 
 #### Offline first
 
@@ -31,6 +33,8 @@ I had a tough time seeing where pre-fetching data for SSR and offline-first redu
 Really you only take the loading time hit once. After that with redux offline and the service worker, it's almost instant. Then using phoenix channels (perhaps look at absinthe graphql subscriptions?), you can get live updates to the data.
 
 So the user gets almost instant loading with their last-seen data despite the app being not SSR'd.
+
+* If you want SSR and don't mind keeping up with webpack, Roman has a great resource:  https://medium.com/@chvanikoff/phoenix-react-love-story-reph-2-14a6dcadbbd0
 
 
 ## How to set it up:
@@ -77,6 +81,17 @@ So the user gets almost instant loading with their last-seen data despite the ap
   plug Plug.Static,
     at: "/static/media", from: {:app_name, "priv/build/static/media"}, gzip: false
 `
-- mix deps.get
-- mix phx.server
+- Thanks to Pete Corey http://www.east5th.co/blog/2017/04/03/using-create-react-app-with-phoenix/ for the heads up on Plug.Static.IndexHtml
+- from web dir: npm run build
+- from server dir: mix deps.get
+- from server dir: mix phx.server
 - visit http://0.0.0.0:4000/
+
+#### For developing...
+
+- from web dir: npm run start
+- from phx dir: mix phx.server
+
+* So the CRA app handles the live reloading and all that during development.
+* The phoenix server handles the api
+* Then npm run build as one of your deploy steps.
