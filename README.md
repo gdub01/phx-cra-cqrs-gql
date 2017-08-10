@@ -22,15 +22,21 @@ Getting SSR to work with code splitting seems to make importing harder.
 
 #### Prefetching data
 
-If you want to prefetch data to hydrate state when you respond via SSR, you may need to recreate each route on the server side so you can specify the route's data dependencies... increasing dev time for creating and maintaining features.
+If you want to prefetch data when you respond via SSR, you may need to recreate each route on the server side so you can specify the route's data dependencies... increasing dev time for creating and maintaining features.
 
-* Using a tool like Apollo (graphql) SSR to get data dependencies dynamically may make it so the above isn't required. So it may be worth looking at eventually.
+* Using a tool like Apollo (graphql) SSR to get data dependencies dynamically may make it so the above isn't required. So it may be worth looking at eventually. I couldn't experiment too much with this because the CommonJS vs CRA's ES6 imports blocker.
 
 #### Offline first
 
 I had a tough time seeing where pre-fetching data for SSR and offline-first redux/state data stores intersect. There may be business trade-offs there and not absolute wins.
 
-Really you only take the loading time hit once. After that with redux offline and the service worker, it's almost instant. Then using phoenix channels (perhaps look at absinthe graphql subscriptions?), you can get live updates to the data.
+### Conclusion
+
+With code splitting, you can reduce your bundle size for faster initial loading.
+
+Ulimtately you only take the loading time hit once. After that with redux offline and the service worker, it's almost instant.
+
+Then using phoenix channels (perhaps look at absinthe graphql subscriptions?), you can get live updates to the data.
 
 So the user gets almost instant loading with their last-seen data despite the app being not SSR'd.
 
