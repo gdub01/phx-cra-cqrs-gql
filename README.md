@@ -64,7 +64,8 @@ So the user gets almost instant loading with their last-seen data despite the ap
 - add this dep: `{:plug_static_index_html, "~> 1.0"}`
 - In endpoint.ex replace app_name with ur appname:
 
-` plug Plug.Static.IndexHtml,
+`
+  plug Plug.Static.IndexHtml,
     at: "/"
 
   plug Plug.Static,
@@ -78,14 +79,15 @@ So the user gets almost instant loading with their last-seen data despite the ap
     at: "/static/css", from: {:app_name, "priv/build/static/css"}, gzip: true
 
   plug Plug.Static,
-    at: "/static/media", from: {:app_name, "priv/build/static/media"}, gzip: false`
-
-* Thanks to Pete Corey http://www.east5th.co/blog/2017/04/03/using-create-react-app-with-phoenix/ for the heads up on Plug.Static.IndexHtml
+    at: "/static/media", from: {:app_name, "priv/build/static/media"}, gzip: false
+`
 
 - from web dir: npm run build
 - from server dir: mix deps.get
 - from server dir: mix phx.server
 - visit http://0.0.0.0:4000/
+
+Thanks to Pete Corey http://www.east5th.co/blog/2017/04/03/using-create-react-app-with-phoenix/ for the heads up on Plug.Static.IndexHtml
 
 #### For developing...
 
