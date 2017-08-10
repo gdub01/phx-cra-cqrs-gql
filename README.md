@@ -1,12 +1,12 @@
 # Create React App and Phoenix
 
-## Why choose CRA for the phoenix frontend
+### Why choose CRA for the phoenix frontend
 
 1. You don't need to eject create-react-app (CRA).. so you can keep up to date with latest JS/webpack setups.
 2. You get access to all the components in the react world that make front end work faster.
-3. You get a PWA / service worker for possibly caching user data / offline support. 
+3. You get a PWA / service worker for possibly caching user data / offline support.
 
-## ...but no SSR. 4 frontend practices make SSR with CRA difficult...
+### ...but no SSR. 4 frontend practices make SSR with CRA difficult...
 
 #### Common JS vs ES6 modules
 
@@ -37,7 +37,7 @@ So the user gets almost instant loading with their last-seen data despite the ap
 * If you want SSR and don't mind keeping up with webpack, Roman has a great resource:  https://medium.com/@chvanikoff/phoenix-react-love-story-reph-2-14a6dcadbbd0
 
 
-## How to set it up:
+### How to set it up:
 
 #### Step 1: organize server and web folders to be at root of git repo
 
@@ -59,13 +59,12 @@ So the user gets almost instant loading with their last-seen data despite the ap
   "post-build": "rm -rf ../server/priv/build && mv build ../server/priv",
 `
 
-#### Step 3: Make it render on the server
+#### Step 3: Make it render on the server / deploy
 
 - add this dep: `{:plug_static_index_html, "~> 1.0"}`
 - In endpoint.ex replace app_name with ur appname:
 
-`    
-  plug Plug.Static.IndexHtml,
+` plug Plug.Static.IndexHtml,
     at: "/"
 
   plug Plug.Static,
@@ -79,9 +78,10 @@ So the user gets almost instant loading with their last-seen data despite the ap
     at: "/static/css", from: {:app_name, "priv/build/static/css"}, gzip: true
 
   plug Plug.Static,
-    at: "/static/media", from: {:app_name, "priv/build/static/media"}, gzip: false
-`
-- Thanks to Pete Corey http://www.east5th.co/blog/2017/04/03/using-create-react-app-with-phoenix/ for the heads up on Plug.Static.IndexHtml
+    at: "/static/media", from: {:app_name, "priv/build/static/media"}, gzip: false`
+
+* Thanks to Pete Corey http://www.east5th.co/blog/2017/04/03/using-create-react-app-with-phoenix/ for the heads up on Plug.Static.IndexHtml
+
 - from web dir: npm run build
 - from server dir: mix deps.get
 - from server dir: mix phx.server
@@ -89,9 +89,5 @@ So the user gets almost instant loading with their last-seen data despite the ap
 
 #### For developing...
 
-- from web dir: npm run start
-- from phx dir: mix phx.server
-
-* So the CRA app handles the live reloading and all that during development.
-* The phoenix server handles the api
-* Then npm run build as one of your deploy steps.
+- CRA handles live reloading and whatnot during development - from web dir: npm run start
+- Phoenix serves the api - from phx dir: mix phx.server
