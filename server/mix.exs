@@ -5,7 +5,7 @@ defmodule Bonstack.Mixfile do
     [
       app: :bonstack,
       version: "0.0.1",
-      elixir: "~> 1.4",
+      elixir: "~> 1.5.0",
       elixirc_paths: elixirc_paths(Mix.env),
       compilers: [:phoenix, :gettext] ++ Mix.compilers,
       start_permanent: Mix.env == :prod,
@@ -20,7 +20,7 @@ defmodule Bonstack.Mixfile do
   def application do
     [
       mod: {Bonstack.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :eventstore]
     ]
   end
 
@@ -33,13 +33,25 @@ defmodule Bonstack.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.3.0"},
-      {:phoenix_pubsub, "~> 1.0"},
-      {:phoenix_ecto, "~> 3.2"},
-      {:postgrex, ">= 0.0.0"},
-      {:gettext, "~> 0.11"},
+      {:comeonin, "~> 3.1"},
+      {:commanded, "~> 0.13"},
+      {:commanded_ecto_projections, "~> 0.4"},
+      {:commanded_eventstore_adapter, "~> 0.1"},
+      {:cors_plug, "~> 1.4"},
       {:cowboy, "~> 1.0"},
-      {:plug_static_index_html, "~> 1.0"}
+      {:exconstructor, "~> 1.1"},
+      {:ex_machina, "~> 2.0", only: :test},
+      {:gettext, "~> 0.11"},
+      {:guardian, "~> 0.14"},
+      {:mix_test_watch, "~> 0.4", only: :dev, runtime: false},
+      {:plug_static_index_html, "~> 1.0"},
+      {:phoenix, "~> 1.3.0"},
+      {:phoenix_ecto, "~> 3.2"},
+      {:phoenix_pubsub, "~> 1.0"},
+      {:postgrex, ">= 0.0.0"},
+      {:slugger, "~> 0.2"},
+      {:uuid, "~> 1.1"},
+      {:vex, "~> 0.6"},
     ]
   end
 
@@ -47,7 +59,7 @@ defmodule Bonstack.Mixfile do
   # For example, to create, migrate and run the seeds file at once:
   #
   #     $ mix ecto.setup
-  #
+  #     $ MIX_ENV=test mix ecto.reset
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [

@@ -16,7 +16,7 @@ use Mix.Config
 config :bonstack, BonstackWeb.Endpoint,
   load_from_system_env: true,
   url: [host: "example.com", port: 80],
-  cache_static_manifest: "priv/static/cache_manifest.json"
+  cache_static_manifest: "priv/build/cache_manifest.json"
 
 # Do not print debug messages in production
 config :logger, level: :info
@@ -58,6 +58,24 @@ config :logger, level: :info
 #
 #     config :bonstack, BonstackWeb.Endpoint, server: true
 #
+
+# Configure the event store database
+config :eventstore, EventStore.Storage,
+  serializer: Commanded.Serialization.JsonSerializer,
+  username: "postgres",
+  password: "postgres",
+  database: "bonstack_eventstore_prod",
+  hostname: "localhost",
+  pool_size: 10
+
+# Configure the read store database
+config :bonstack, Bonstack.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  username: "postgres",
+  password: "postgres",
+  database: "bonstack_readstore_prod",
+  hostname: "localhost",
+  pool_size: 15
 
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.

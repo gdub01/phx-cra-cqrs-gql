@@ -27,11 +27,11 @@ defmodule BonstackWeb.ChannelCase do
 
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Bonstack.Repo)
-    unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Bonstack.Repo, {:shared, self()})
-    end
-    :ok
+    # :ok = Ecto.Adapters.SQL.Sandbox.checkout(Bonstack.Repo)
+    # unless tags[:async] do
+    #   Ecto.Adapters.SQL.Sandbox.mode(Bonstack.Repo, {:shared, self()})
+    # end
+    # :ok
   end
 
 end

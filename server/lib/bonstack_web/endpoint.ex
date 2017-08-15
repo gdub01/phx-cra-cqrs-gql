@@ -12,7 +12,7 @@ defmodule BonstackWeb.Endpoint do
     at: "/"
 
   plug Plug.Static,
-    at: "/", from: {:bonstack, "priv/build"}, gzip: false,
+    at: "/", from: {:bonstack, "priv/build"}, gzip: true,
     only: ~w(favicon.ico robots.txt manifest.json index.html)
 
   plug Plug.Static,
@@ -22,7 +22,7 @@ defmodule BonstackWeb.Endpoint do
     at: "/static/css", from: {:bonstack, "priv/build/static/css"}, gzip: true
 
   plug Plug.Static,
-    at: "/static/media", from: {:bonstack, "priv/build/static/media"}, gzip: false
+    at: "/static/media", from: {:bonstack, "priv/build/static/media"}, gzip: true
 
 
 

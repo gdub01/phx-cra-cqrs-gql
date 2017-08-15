@@ -9,11 +9,25 @@ config :bonstack, BonstackWeb.Endpoint,
 # Print only warnings and errors during test
 config :logger, level: :warn
 
-# Configure your database
+config :ex_unit,
+  capture_log: true
+
+# Configure the event store database
+config :eventstore, EventStore.Storage,
+  serializer: Commanded.Serialization.JsonSerializer,
+  username: "postgres",
+  password: "postgres",
+  database: "bonstack_eventstore_test",
+  hostname: "localhost",
+  pool_size: 1
+
+# Configure the read store database
 config :bonstack, Bonstack.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
-  database: "bonstack_test",
+  database: "bonstack_readstore_test",
   hostname: "localhost",
-  pool: Ecto.Adapters.SQL.Sandbox
+  pool_size: 1
+
+config :comeonin, :bcrypt_log_rounds, 4

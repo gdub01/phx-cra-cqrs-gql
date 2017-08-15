@@ -12,8 +12,17 @@ defmodule Bonstack.Application do
       supervisor(Bonstack.Repo, []),
       # Start the endpoint when the application starts
       supervisor(BonstackWeb.Endpoint, []),
-      # Start your own worker by calling: Bonstack.Worker.start_link(arg1, arg2, arg3)
-      # worker(Bonstack.Worker, [arg1, arg2, arg3]),
+
+      # Accounts context
+      supervisor(Bonstack.Accounts.Supervisor, []),
+
+      # Enforce unique constraints
+      worker(Bonstack.Validation.Unique, []),
+
+      # Read model projections
+      worker(Bonstack.Chat.Projectors.Member, [], id: :chat_members_projector),
+      worker(Bonstack.Chat.Projectors.Room, [], id: :chat_room_projector),
+
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
