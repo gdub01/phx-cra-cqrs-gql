@@ -17,9 +17,9 @@ defmodule Bonstack.Chat.Queries.ListRooms do
     query = query(options)
 
     rooms = query |> entries(options) |> repo.all()
-    total_count = query |> count() |> repo.aggregate(:count, :uuid)
-
-    {rooms, total_count}
+    # total_count = query |> count() |> repo.aggregate(:count, :uuid)
+    rooms
+    # {rooms, total_count}
   end
 
   defp query(options) do

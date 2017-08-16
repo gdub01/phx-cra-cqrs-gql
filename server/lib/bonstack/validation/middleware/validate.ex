@@ -18,7 +18,7 @@ defmodule Bonstack.Validation.Middleware.Validate do
     errors = command |> Vex.errors() |> merge_errors()
 
     pipeline
-    |> respond({:error, :validation_failure, errors})
+    |> respond({:error, errors})
     |> halt()
   end
 
@@ -28,5 +28,6 @@ defmodule Bonstack.Validation.Middleware.Validate do
       fn {_error, field, _type, _message} -> field end,
       fn {_error, _field, _type, message} -> message end)
     |> Map.new()
+    |> Enum.map(fn {k, v} -> %{message: k, details: v} end)
   end
 end

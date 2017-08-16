@@ -21,7 +21,6 @@ defmodule BonstackWeb do
     quote do
       use Phoenix.Controller, namespace: BonstackWeb
       import Plug.Conn
-      import BonstackWeb.Router.Helpers
       import BonstackWeb.Gettext
     end
   end
@@ -34,7 +33,6 @@ defmodule BonstackWeb do
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_flash: 2, view_module: 1]
 
-      import BonstackWeb.Router.Helpers
       import BonstackWeb.ErrorHelpers
       import BonstackWeb.Gettext
     end

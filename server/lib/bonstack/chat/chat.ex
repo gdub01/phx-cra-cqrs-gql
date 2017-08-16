@@ -50,7 +50,7 @@ defmodule Bonstack.Chat do
   def room_by_slug!(slug), do: room_by_slug_query(slug) |> Repo.one!()
 
   @doc """
-  Get messages from an room
+  Get messages from a room
   """
   def room_messages(%Room{uuid: room_uuid}) do
     room_uuid
@@ -64,7 +64,7 @@ defmodule Bonstack.Chat do
   def get_message!(message_uuid), do: Repo.get!(Message, message_uuid)
 
   @doc """
-  Create an member
+  Create a member
   """
   def create_member(attrs \\ %{}) do
     uuid = UUID.uuid4()

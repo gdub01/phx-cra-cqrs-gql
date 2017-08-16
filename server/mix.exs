@@ -33,6 +33,9 @@ defmodule Bonstack.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:absinthe, "~> 1.4.0-beta.3"},
+      {:absinthe_plug, "~> 1.4.0-beta.1"},
+      {:absinthe_phoenix, github: "absinthe-graphql/absinthe_phoenix"},
       {:comeonin, "~> 3.1"},
       {:commanded, "~> 0.13"},
       {:commanded_ecto_projections, "~> 0.4"},
@@ -48,6 +51,7 @@ defmodule Bonstack.Mixfile do
       {:phoenix, "~> 1.3.0"},
       {:phoenix_ecto, "~> 3.2"},
       {:phoenix_pubsub, "~> 1.0"},
+      {:poison, "~> 3.1", override: true},
       {:postgrex, ">= 0.0.0"},
       {:slugger, "~> 0.2"},
       {:uuid, "~> 1.1"},
